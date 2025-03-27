@@ -11,6 +11,8 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 import os
 from pathlib import Path
+
+from django.contrib import staticfiles
 from dotenv import load_dotenv
 
 from ckeditor_demo.settings import BASE_DIR
@@ -150,6 +152,7 @@ STATIC_URL = 'static/'
 STATICFILES_DIRS = [
     BASE_DIR / 'static',
 ]
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 
 MEDIA_URL ='media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
