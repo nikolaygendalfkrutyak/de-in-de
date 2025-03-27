@@ -4,7 +4,6 @@ from django.contrib.auth import get_user_model
 from django_ckeditor_5.fields import CKEditor5Field
 from django.db import models
 
-# from account.models import Country
 User=get_user_model()
 
 # Create your models here.
