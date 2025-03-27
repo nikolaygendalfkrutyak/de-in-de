@@ -1,0 +1,91 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">Orders</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="..">Back</a></li>
+                <li class="breadcrumb-item"><a href="{%  url 'manager:testimonials' %}">Testimonial management</a> </li>
+                <li class="breadcrumb-item active text-white">Orders Management</li>
+                <li class="breadcrumb-item"><a href="{%  url 'manager:contacts' %}">Contact management</a> </li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+       <div class="container-fluid py-5">
+            <div class="container py-5 text-center">
+                <div class="row justify-content-center">
+                        <section id="o_management">
+                            <div class="container" data-aos="fade-up">
+                                <div class="row gy-4">
+                                <h2>Unaccepted Orders</h2>
+                                    {% for un_order in unaccepted_orders %}
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">Id</th>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">shipping details</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Ordered Products</th>
+                                                    <th scope="col">Accepted</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <th scope="row"><div class="d-flex align-items-center">{{  un_order.pk }}</div></th>
+                                                        <td><div>{{  un_order.user }}</div></td>
+                                                        <td><div>{{ un_order.shipping_details }}</div></td>
+                                                        <td> <div>{{ un_order.total }}</div></td>
+                                                        <td><div>{{ un_order.ordered_products }}</div></td>
+                                                        <td><div>{{ un_order.accepted }}</div></td>
+                                                        <td><div><a href="{% url 'manager:order_accept' un_order.pk 'accept' %}">Confirm</a></div></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    {% endfor %}
+                                <h2>Accepted Orders</h2>
+                                {% for a_order in accepted_orders %}
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">Id</th>
+                                                    <th scope="col">User</th>
+                                                    <th scope="col">shipping details</th>
+                                                    <th scope="col">Total</th>
+                                                    <th scope="col">Ordered Products</th>
+                                                    <th scope="col">Accepted</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <th scope="row"><div class="d-flex align-items-center">{{  a_order.pk }}</div></th>
+                                                        <td><div>{{  a_order.user }}</div></td>
+                                                        <td><div>{{ a_order.shipping_details }}</div></td>
+                                                        <td> <div>{{ a_order.total }}</div></td>
+                                                        <td><div>{{ a_order.ordered_products }}</div></td>
+                                                        <td><div>{{ a_order.accepted }}</div></td>
+                                                        <td><div><a href="{% url 'manager:order_accept' a_order.pk 'reject' %}">Reject</a></div></td>
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}

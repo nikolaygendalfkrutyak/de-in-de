@@ -1,0 +1,60 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">Orders</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="..">Back</a></li>
+                <li class="breadcrumb-item active text-white">Testimonial Management</li>
+                <li class="breadcrumb-item"><a href="{%  url 'manager:orders' %}">Orders management</a> </li>
+                <li class="breadcrumb-item"><a href="{%  url 'manager:contacts' %}">Contacts management</a> </li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+       <div class="container-fluid py-5">
+            <div class="container py-5 text-center">
+                <div class="row justify-content-center">
+                        <section id="o_management">
+                            <div class="container" data-aos="fade-up">
+                                <div class="row gy-4">
+                                    {% for un_testimonial in unchecked_testimonials %}
+                                        <div class="table-responsive">
+                                            <table class="table">
+                                                <thead>
+                                                  <tr>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">Product</th>
+                                                    <th scope="col">Rating</th>
+                                                    <th scope="col">Appropriate</th>
+                                                    <th scope="col">Comment</th>
+                                                  </tr>
+                                                </thead>
+                                                <tbody>
+
+                                                    <tr>
+                                                        <th scope="row"><div class="d-flex align-items-center">{{  un_testimonial.name }}</div></th>
+                                                        <td><div>{{ un_testimonial.product }}</div></td>
+                                                        <td> <div>{{ un_testimonial.rating }}</div></td>
+                                                        <td><div>{{ un_testimonial.is_appropriate }}</div></td>
+                                                        <td><div>{{ un_testimonial.comment }}</div></td>
+                                                        <td><div><a href="{% url 'manager:testimonial_check' un_testimonial.pk "accept" %}">Accept</a></div></td>
+                                                        <td><div><a href="{% url 'manager:testimonial_check' un_testimonial.pk "decline" %}">Decline</a></div></td>
+
+                                                    </tr>
+                                                </tbody>
+                                            </table>
+                                        </div>
+
+                                    {% endfor %}
+                                </div>
+                            </div>
+                        </section>
+                    </div>
+                </div>
+            </div>
+
+
+{% endblock %}

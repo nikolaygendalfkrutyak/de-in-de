@@ -1,0 +1,24 @@
+{% extends 'index.html' %}
+
+{% block content %}
+    <body>
+
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">Cart</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="..">Home</a></li>
+                <li class="breadcrumb-item"><a href="../checkout">Checkout</a></li>
+                <li class="breadcrumb-item active text-white">Testimonial</li>
+                <li class="breadcrumb-item"><a href="../cart">Cart</a></li>
+                <li class="breadcrumb-item"><a href="../contact">Contact</a></li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+
+        <!-- Testimonial Start -->
+        {% include 'includes/testimonials_pattern.html' %}
+        <!-- Testimonial End -->
+{% endblock %}

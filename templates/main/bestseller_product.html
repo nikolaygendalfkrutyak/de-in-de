@@ -1,0 +1,36 @@
+<div class="container-fluid py-5">
+        <div class="container py-5">
+            <div class="text-center mx-auto mb-5" style="max-width: 700px;">
+                <h1 class="display-4">Bestseller Products</h1>
+                <p>.Her you can see out bestseller products</p>
+            </div>
+            <div class="row g-4 owl-carousel testimonial-carousel">
+                {% for bs_product in bestseller_products %}
+                    <div class="row align-items-center">
+                        <div class="col-6">
+                            <img src="{{bs_product.photo.url}}" class="img-fluid rounded-circle w-100" alt="">
+                        </div>
+                        <div class="col-6">
+                            <a href="#" class="h5">{{ bs_product.name }}</a>
+                            <div class="d-flex mb-4">
+                                {% for _ in "12345"|make_list %}
+                                    {% if forloop.counter <= bs_product.rating %}
+                                        <i class="fa fa-star text-warning"></i>
+                                    {% elif forloop.counter|floatformat:1 == bs_product.rating|floatformat:1 %}
+                                        <i class="fa fa-star-half-alt text-warning"></i>
+                                    {% else %}
+                                        <i class="fa fa-star-o text-secondary"></i>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                            <h4 class="mb-3">{{ bs_product.price }} $</h4>
+                            <a href="{% url 'change_product' bs_product.pk "add" %}" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                            </a>
+                            <a href="{% url 'shop_detail' bs_product.pk %}" class="btn btn-success">Details</a>    
+                        </div>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>

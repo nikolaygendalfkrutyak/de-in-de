@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+
+{% block content %}
+
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">Contact</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="..">Home</a></li>
+                <li class="breadcrumb-item"><a href="../checkout">Checkout</a></li>
+                <li class="breadcrumb-item "><a href="../testimonial">Testimonial</a></li>
+                <li class="breadcrumb-item"><a href="../cart">Cart</a></li>
+                <li class="breadcrumb-item active text-white">Contact</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+
+        <!-- Contact Start -->
+        <div class="container-fluid contact py-5">
+            <div class="container py-5">
+                <div class="p-5 bg-light rounded">
+                    <div class="row g-4">
+                        <div class="col-12">
+                             <div class="container">
+                                <h2>Why People Like Us?</h2>
+                                <p>Our website provides an enjoyable browsing experience with a user-friendly interface, 
+                                    engaging content, and a commitment to quality. While we don’t actually sell products, our well-structured platform is designed to reflect how a professional
+                                    e-commerce site should look and function.</p>
+                        
+                                <h2>About Us</h2>
+                                <p>Welcome to our demo web-market platform! Although no real transactions can take place now, 
+                                    this site can be easily filled with real products, and help connect customers with the sellers.</p>
+                        
+                                <h2>Privacy Policy</h2>
+                                <p>Your privacy is important to us. We can save some user data that you provide us, but we
+                                    don't collect any extra data. 
+                                    Any information displayed here is for demonstration purposes only and does not 
+                                    represent actual data collection practices.</p>
+                        
+                                <h2>Terms and Conditions</h2>
+                                <p>By using this site, you acknowledge that this is a non-functional demonstration platform. 
+                                    No actual goods or services are provided, and any references to purchases or transactions are purely fictional.</p>
+                        
+                                <h2>Return Policy</h2>
+                                <p>Since this website does not provide real transactions, there are no actual returns or refunds. 
+                                    This section serves as an example of how an e-commerce website might present its return policies.</p>
+                        
+                                <h2>FAQs and Help</h2>
+                                <p>Q: Can I buy products from this site? <br>
+                                A: No, this is a fictional website designed for demonstration purposes only.</p>
+                                
+                                <p>Q: Is my personal data stored? <br>
+                                A: No, this site does not collect or store any real data from users. It can save the information
+                                that you type in deliberately. For example as testimonials, but it will be used for demonstration purposes only</p>
+                        
+                                <p>Q: What is the purpose of this site? <br>
+                                A: This is a project demonstrating how an online store could be structured.</p>
+                                 
+                                 <h2>Anyway try to write us something using the form below</h2>
+                            </div>
+                        </div>
+                        <div class="col-lg-7">
+                            <form method="POST" action="{% url 'contact_form' %}" class="border border-primary rounded p-4 shadow-sm bg-light">
+                                {% csrf_token %}
+                                <input type="text" name="name" class="w-100 form-control border-0 py-3 mb-4" placeholder="Your Name" value="{{ user.username }}" required>
+                                <input type="email" name="email" class="w-100 form-control border-0 py-3 mb-4" placeholder="Enter Your Email" value="{{ user.email }}" required>
+                                <textarea name="message" class="w-100 form-control border-0 mb-4" rows="5" placeholder="Your Message" required></textarea>
+                                <button class="w-100 btn form-control border-secondary py-3 bg-white text-primary" type="submit">Submit</button>
+                            </form>
+                        </div>
+                        <div class="col-lg-5">
+                            <div class="d-flex p-4 rounded mb-4 bg-white">
+                                <i class="fas fa-map-marker-alt fa-2x text-primary me-4"></i>
+                                <div>
+                                    <h4>Address</h4>
+                                    <p class="mb-2">{{ address}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex p-4 rounded mb-4 bg-white">
+                                <i class="fas fa-envelope fa-2x text-primary me-4"></i>
+                                <div>
+                                    <h4>Mail Us</h4>
+                                    <p class="mb-2">{{ email}}</p>
+                                </div>
+                            </div>
+                            <div class="d-flex p-4 rounded bg-white">
+                                <i class="fa fa-phone-alt fa-2x text-primary me-4"></i>
+                                <div>
+                                    <h4>Telephone</h4>
+                                    <p class="mb-2">{{phone}}</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Contact End -->
+
+{% endblock %}

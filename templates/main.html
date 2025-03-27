@@ -1,0 +1,27 @@
+{% extends 'index.html' %}
+
+{% block content %}
+ 
+
+    <!-- Hero Start -->
+    {%  include 'main/hero.html' %}
+    <!-- Hero End -->
+
+
+
+    <!-- Fruits Shop Start-->
+    {% include 'main/shop1.html' %}
+    <!-- Fruits Shop End-->
+
+
+
+
+    <!-- Bestseller Product Start -->
+    {% include 'main/bestseller_product.html' %}
+    <!-- Bestseller Product End -->
+
+
+    <!-- Testimonial Start -->
+    {%  include 'includes/testimonials_pattern.html' %}
+<!-- Testimonial End -->
+{% endblock %}

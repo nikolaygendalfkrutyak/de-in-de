@@ -1,0 +1,157 @@
+{% extends 'index.html' %}
+
+{% block content %}
+ 
+        <!-- Single Page Header start -->
+        <div class="container-fluid page-header py-5">
+            <h1 class="text-center text-white display-6">Shop Detail</h1>
+            <ol class="breadcrumb justify-content-center mb-0">
+                <li class="breadcrumb-item"><a href="#">Home</a></li>
+                <li class="breadcrumb-item"><a href="#">Pages</a></li>
+                <li class="breadcrumb-item active text-white">Shop Detail</li>
+            </ol>
+        </div>
+        <!-- Single Page Header End -->
+
+
+        <!-- Single Product Start -->
+        <div class="container-fluid py-5 mt-5">
+            <div class="container py-5">
+                <div class="row g-4 mb-5">
+                    <div class="col-lg-8 col-xl-9">
+                        <div class="row g-4">
+                            <div class="row">
+                                <div class="col-lg-6 text-center">
+                                    <div class="border rounded overflow-hidden">
+                                        <a href="#">
+                                            <img src="{{ product.photo.url }}" alt="Image" class="img-fluid rounded" style="max-height: 400px; object-fit: cover;">
+                                        </a>
+                                    </div>
+                                </div>
+                                
+                                <div class="col-lg-6">
+                                    <h4 class="fw-bold mb-3">{{ product.name }}</h4>
+                                    <p class="mb-3">Category: {{ product.category }}</p>
+                                    <h5 class="fw-bold mb-3">{{ product.price }} $</h5>
+                            
+                                    <!-- Dynamic Star Rating -->
+                                    <div class="d-flex mb-4">
+                                        {% for _ in "12345"|make_list %}
+                                            {% if forloop.counter <= product.rating %}
+                                                <i class="fa fa-star text-warning"></i>
+                                            {% elif forloop.counter|floatformat:1 == product.rating|floatformat:1 %}
+                                                <i class="fa fa-star-half-alt text-warning"></i>
+                                            {% else %}
+                                                <i class="fa fa-star-o text-secondary"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                            
+                                    <p class="mb-4">{{ product.description }}</p>
+                            
+                                    <a href="{% url 'change_product' product.pk 'add' %}" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                        <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="col-lg-12">
+                                <nav>
+                                    <div class="nav nav-tabs mb-3">
+                                        <button class="nav-link active border-white border-bottom-0" type="button" role="tab"
+                                            id="nav-about-tab" data-bs-toggle="tab" data-bs-target="#nav-about"
+                                            aria-controls="nav-about" aria-selected="true">Description</button>
+                                        <button class="nav-link border-white border-bottom-0" type="button" role="tab"
+                                            id="nav-mission-tab" data-bs-toggle="tab" data-bs-target="#nav-mission"
+                                            aria-controls="nav-mission" aria-selected="false">Reviews</button>
+                                    </div>
+                                </nav>
+                                <div class="tab-content mb-5">
+                                    <div class="tab-pane active" id="nav-about" role="tabpanel" aria-labelledby="nav-about-tab">
+                                        <p>{{ product.detailed_description }}</p>
+                                    </div>
+                                    <div class="tab-pane" id="nav-mission" role="tabpanel" aria-labelledby="nav-mission-tab">
+                                        {% if testimonials %}
+                                            {% for testimonial in testimonials %}
+                                                <div class="testimonial-item img-border-radius bg-light rounded p-4">
+                                                    <div class="position-relative">
+                                                        <i class="fa fa-quote-right fa-2x text-secondary position-absolute" style="bottom: 30px; right: 0;"></i>
+                                                        <div class="mb-4 pb-4 border-bottom border-secondary">
+                                                            <p class="mb-0">{{ testimonial.comment }}</p>
+                                                        </div>
+                                                        <div class="d-flex align-items-center flex-nowrap">
+                                                            <div class="ms-4 d-block">
+                                                                <h4 class="text-dark">{{ testimonial.name }}</h4>
+                                                                <div class="d-flex mb-4">
+                                                                    {% for _ in "12345"|make_list %}
+                                                                        {% if forloop.counter <= product.rating %}
+                                                                            <i class="fa fa-star text-warning"></i>
+                                                                        {% elif forloop.counter|floatformat:1 == product.rating|floatformat:1 %}
+                                                                            <i class="fa fa-star-half-alt text-warning"></i>
+                                                                        {% else %}
+                                                                            <i class="fa fa-star-o text-secondary"></i>
+                                                                        {% endif %}
+                                                                    {% endfor %}
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            
+                                            {% endfor %}
+                                            
+                                        {% else %}
+                                                <p class="text-center">No testimonials available.</p>
+                                        {% endif %}
+                                    </div>
+                                        
+                                </div>
+                            </div>
+                            <form method="post" action="{% url 'submit_review' product.pk%}" class="border border-primary rounded p-4 shadow-sm bg-light">
+                                {% csrf_token %}
+                                {{ review_form.as_p }}
+                                <button type="submit" class="btn border border-secondary text-primary rounded-pill px-4 py-3"> Post Comment</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+                <h1 class="fw-bold mb-0">Related products</h1>
+                <div class="vesitable">
+                    <div class="owl-carousel vegetable-carousel justify-content-center">
+                        {% for related_product in related_products %}
+                            <div class="rounded position-relative fruit-item">
+                                <div class="fruit-img">
+                                    <img src="{{ related_product.photo.url }}" class="img-fluid w-100 rounded-top" alt="">
+                                </div>
+                                <div class="text-white bg-secondary px-3 py-1 rounded position-absolute" style="top: 10px; left: 10px;">
+                                    {{ related_product.category }}
+                                </div>
+                                <div class="p-4 border border-secondary border-top-0 rounded-bottom">
+                                    <h4>{{ related_product.name }}</h4>
+                                    <p>{{ related_product.description }}</p>
+                                    <div class="d-flex mb-4" href="{% url 'shop_detail' related_product.pk %}">
+                                        {% for _ in "12345"|make_list %}
+                                            {% if forloop.counter <= related_product.rating %}
+                                                <i class="fa fa-star text-warning"></i>
+                                            {% elif forloop.counter|floatformat:1 == related_product.rating|floatformat:1 %}
+                                                <i class="fa fa-star-half-alt text-warning"></i>
+                                            {% else %}
+                                                <i class="fa fa-star-o text-secondary"></i>
+                                            {% endif %}
+                                        {% endfor %}
+                                    </div>
+                                    <div class="d-flex justify-content-between flex-lg-wrap">
+                                        <p class="text-dark fs-5 fw-bold mb-0">${{ related_product.price }} / kg</p>
+                                        <a href="{% url 'change_product' related_product.pk "add" %}" class="btn border border-secondary rounded-pill px-3 text-primary">
+                                            <i class="fa fa-shopping-bag me-2 text-primary"></i> Add to cart
+                                        </a>
+                                    </div>
+                                </div>
+                            </div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Single Product End -->
+
+{% endblock %}
